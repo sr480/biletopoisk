@@ -1,0 +1,69 @@
+.appSelect {
+  position: relative;
+  display: flex;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid #E1E3E6;
+  border-radius: 8px;
+  padding: 10px 16px;
+
+  font-family: 'SF Pro Text';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  justify-content: space-between;
+}
+.appSelect.expanded {
+  border: 1px solid #FF5500
+}
+
+.placeholder {
+  color: #999FA6;
+}
+
+.dropDown {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20px;
+
+  border: 1px solid #FFFFFF;
+  box-shadow: 0px 10px 22px -4px rgba(27, 31, 35, 0.12);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity ease .5s;
+  z-index: 1000;
+}
+.dropDown.expanded {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dropDown li {
+  display: flex;
+  height: 42px;
+  padding: 12px 12px 10px 12px;
+}
+.dropDown li:hover {
+  background: #eee;
+}
+
+.dropDownButton {
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  background-image: url("/expander.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+}
+.dropDownButton.expanded {
+  transform: rotate(180deg);
+}

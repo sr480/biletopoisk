@@ -1,0 +1,11 @@
+.home {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 23px;
+}
+
+.container {
+  flex-grow: 1;
+  flex-shrink: 0;
+}

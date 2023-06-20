@@ -1,0 +1,36 @@
+.filterPanel {
+  display: flex;
+
+  width: 408px;
+
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.filterContainer {
+  position: fixed;
+  top: 108px;
+  left: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+
+  width: 408px;
+
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.filterContainer h2 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+
+.filterContainer>* {
+  width: 100%;
+}

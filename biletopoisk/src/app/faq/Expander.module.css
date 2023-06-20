@@ -1,0 +1,17 @@
+.expander {
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-height: 80px;
+
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.expander h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
