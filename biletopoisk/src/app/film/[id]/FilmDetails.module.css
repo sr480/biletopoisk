@@ -1,0 +1,52 @@
+.container {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row;
+  gap: 32px;
+}
+
+.container img {
+  border-radius: 8px;
+}
+
+.container h2 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
+  margin-bottom: 24px;
+}
+
+.container dt {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-right: 8px;
+  margin-bottom: 16px;
+}
+
+.container dd {
+  display: inline;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.container dd:after {
+  display: block;
+  content: '';
+}
+
+.container h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.container p {
+  font-size: 16px;
+  line-height: 24px;
+}

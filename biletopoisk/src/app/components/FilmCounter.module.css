@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-flow: row;
+}
+
+.buttons {
+  margin: auto 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  outline: 0;
+  background: #FF5500;
+}
+
+.buttons:disabled {
+  background: #FFA375;
+}
+
+.counter {
+  margin: auto 0;
+  text-align: center;
+  width: 28px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+}

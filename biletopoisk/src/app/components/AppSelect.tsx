@@ -12,15 +12,16 @@ export interface AppSelectOption {
 interface Props {
   options: AppSelectOption[];
   placeholder?: string;
+  onSelect: (value: string | undefined) => void;
 }
 
-export const AppSelect: FunctionComponent<Props> = ({ options, placeholder }) => {
+export const AppSelect: FunctionComponent<Props> = ({ options, placeholder, onSelect }) => {
   const [selected, setSelected] = useState<AppSelectOption | undefined>(undefined);
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (expanded && !(event.target as Element).closest(`.${styles.appSelect}`)) {
+      if (expanded) {
         setExpanded(false);
       }
     };
@@ -34,20 +35,23 @@ export const AppSelect: FunctionComponent<Props> = ({ options, placeholder }) =>
   const handleOptionSelect = (option: AppSelectOption) => {
     setSelected(option);
     setExpanded(false);
+    onSelect(option.value);
   };
-  return <div className={classNames(styles.appSelect, { [styles.expanded]: expanded })} onClick={() => setExpanded(!expanded)}>
-    {
-      selected ?
-        <span>{selected.name}</span> :
-        !!placeholder && <span className={styles.placeholder}>{placeholder}</span>
-    }
-    <button className={classNames(styles.dropDownButton, { [styles.expanded]: expanded })} title="Развернуть"></button>
-    <ul className={classNames(styles.dropDown, { [styles.expanded]: expanded })}>
-      {options.map((option) => (
-        <li key={option.value} onClick={() => handleOptionSelect(option)}>
-          {option.name}
-        </li>
-      ))}
-    </ul>
-  </div>
+  return (
+    <div className={classNames(styles.appSelect, { [styles.expanded]: expanded })} onClick={() => setExpanded(!expanded)}>
+      {
+        selected ?
+          <span>{selected.name}</span> :
+          !!placeholder && <span className={styles.placeholder}>{placeholder}</span>
+      }
+      <button className={classNames(styles.dropDownButton, { [styles.expanded]: expanded })} title="Развернуть"></button>
+      <ul className={classNames(styles.dropDown, { [styles.expanded]: expanded })}>
+        {options.map((option) => (
+          <li key={option.value} onClick={() => handleOptionSelect(option)}>
+            {option.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
