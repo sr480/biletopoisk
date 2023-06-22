@@ -1,5 +1,4 @@
 .appSelect {
-  position: relative;
   display: flex;
   height: 40px;
   background: #FFFFFF;
@@ -22,14 +21,14 @@
   color: #999FA6;
 }
 
+.dropDownContainer {
+  position: fixed;
+}
+
 .dropDown {
   visibility: hidden;
-  position: absolute;
   display: flex;
   flex-flow: column;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
   background: #fff;
   padding: 20px;
 
@@ -38,7 +37,6 @@
   border-radius: 8px;
   opacity: 0;
   transition: opacity ease .5s;
-  z-index: 1000;
 }
 .dropDown.expanded {
   visibility: visible;
@@ -63,7 +61,16 @@
   background-repeat: no-repeat;
   width: 18px;
   height: 18px;
+  transform: rotate(180deg);
 }
 .dropDownButton.expanded {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
+}
+
+.fallBack {
+  position: fixed;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
 }

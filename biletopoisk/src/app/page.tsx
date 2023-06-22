@@ -1,12 +1,12 @@
 'use client'
 
-import styles from './page.module.css'
-import { FilmsFilter, Filter } from './Filter'
-import { filmsMock } from './models/film.mock'
-import { FilmCard } from './FilmCard';
 import { useEffect, useState } from 'react';
+import { FilmCard } from './FilmCard';
+import { FilmsFilter, Filter } from './Filter';
+import { HighlighterContext } from './components/TextHighlighter/TextHighlighter';
+import { filmsMock } from './models/film.mock';
 import { Film } from './models/film.model';
-import { HighlighterContext } from './components/TextHighlighter';
+import styles from './page.module.css';
 
 function searchWords(search: string, text: string): boolean {
   const words = search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&').split('\\ ');

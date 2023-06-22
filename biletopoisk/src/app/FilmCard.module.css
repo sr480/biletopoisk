@@ -29,14 +29,3 @@
   font-size: 16px;
   line-height: 20px;
 }
-
-.header {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
-
-.imageContainer {
-  width: 100px;
-  height: 120px;
-}
