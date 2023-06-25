@@ -1,11 +1,11 @@
 'use client'
 
+import { useGetCinimasQuery } from '@/app/store/services/filmsApi';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { filmGenres } from '../../models/film.model';
+import { AppSelect, AppSelectOption } from '../AppSelect/AppSelect';
+import { DebouncedInput } from '../DebouncedInput/DebouncedInput';
 import styles from './Filter.module.css';
-import { AppSelect } from './components/AppSelect/AppSelect';
-import { cinemaMock } from './models/cinema.mock';
-import { filmGenres } from './models/film.model';
-import { DebouncedInput } from './components/DebouncedInput/DebouncedInput';
 
 export interface FilmsFilter {
   cinemaId?: string;
@@ -18,11 +18,19 @@ interface Props {
 }
 
 export const Filter: FunctionComponent<Props> = ({ onFilterChange }) => {
-  const genreOptions = Object.entries(filmGenres).map(([value, name]) => ({
+  const genreOptions = Object.entries(filmGenres).map<AppSelectOption>(([value, name]) => ({
     value,
     name
   }));
-  const cinemaOptions = cinemaMock.map(cinema => ({ name: cinema.name, value: cinema.id }));
+  genreOptions.unshift({ name: 'Не выбран' });
+
+  const cinemaResults = useGetCinimasQuery(undefined);
+
+  let cinemaOptions = new Array<AppSelectOption>();
+  if (cinemaResults.data) {
+    cinemaOptions.push(...cinemaResults.data.map(cinema => ({ value: cinema.id, name: cinema.name })));
+  }
+
   const [filter, setFilter] = useState<FilmsFilter>({});
   const updateTitle = useCallback((title: string) => {
     const updatedFilter = { ...filter, title };

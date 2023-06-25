@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./Header.module.css";
-import { Cart } from "./Cart";
+import { Cart } from "../Cart/Cart";
 
 export function Header() {
   return <nav className={styles.nav}>

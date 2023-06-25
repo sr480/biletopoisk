@@ -1,3 +1,4 @@
+import { useDebounce } from "@/app/hooks/useDebounce";
 import { FunctionComponent, useEffect, useState } from "react";
 
 interface Props {
@@ -8,14 +9,11 @@ interface Props {
 }
 export const DebouncedInput: FunctionComponent<Props> = ({ placeholder, debounce = 500, onChange, initial = '' }) => {
   const [value, setValue] = useState(initial);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onChange(value);
-    }, debounce);
+  const debouncedValue = useDebounce(value, debounce);
 
-    return () => clearTimeout(timer);
-  }, [value, debounce, onChange]);
+  useEffect(() => {
+    onChange(debouncedValue);
+  }, [debouncedValue, onChange]);
 
   return <input placeholder={placeholder} type="text" value={value} onChange={(e) => setValue(e.target.value)} />
 }

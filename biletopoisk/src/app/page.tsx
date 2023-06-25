@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { FilmCard } from './FilmCard';
-import { FilmsFilter, Filter } from './Filter';
+import { FilmCard } from './components/FilmCard/FilmCard';
+import { FilmsFilter, Filter } from './components/Filter/Filter';
+import { LoadingSpinner } from './components/LoadingSpinner';
 import { HighlighterContext } from './components/TextHighlighter/TextHighlighter';
-import { filmsMock } from './models/film.mock';
 import { Film } from './models/film.model';
 import styles from './page.module.css';
+import { useGetFilmsByCinemaQuery } from './store/services/filmsApi';
 
 function searchWords(search: string, text: string): boolean {
   const words = search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&').split('\\ ');
@@ -15,10 +16,12 @@ function searchWords(search: string, text: string): boolean {
 }
 
 export default function Home() {
-  const [films, setFilms] = useState<Film[]>(filmsMock as any);
+  const [films, setFilms] = useState<Film[]>([]);
   const [filter, setFilter] = useState<FilmsFilter>({});
+  const { data, isLoading, isError } = useGetFilmsByCinemaQuery(filter.cinemaId);
+
   useEffect(() => {
-    setFilms(filmsMock.filter(film => {
+    setFilms((data || []).filter(film => {
       let compare = true;
       if (filter.genre) {
         compare = compare && film.genre === filter.genre;
@@ -28,20 +31,22 @@ export default function Home() {
       }
       return compare;
     }) as any);
-  }, [filter]);
-
-  const searchFilms = ((filter: FilmsFilter) => {
-    setFilter(filter);
-  });
+  }, [filter, data]);
 
   return (
     <div className={styles.home}>
       <HighlighterContext.Provider value={filter.title || ''}>
-        <Filter onFilterChange={(filter) => searchFilms(filter)}></Filter>
+        <Filter onFilterChange={(filter) => setFilter(filter)}></Filter>
         <div className={styles.container}>
-          {films.map(film => (
-            <FilmCard key={film.id} film={film}></FilmCard>
-          ))}
+          {isLoading && <LoadingSpinner></LoadingSpinner>}
+          {isError && <div>Ошибка загрузки...</div>}
+          {!isLoading && !isError &&
+
+            films.map(film => (
+              <FilmCard key={film.id} film={film}></FilmCard>
+            ))
+
+          }
         </div>
       </HighlighterContext.Provider>
     </div>

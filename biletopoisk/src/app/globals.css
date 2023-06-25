@@ -4,16 +4,19 @@
   font-weight: 200;
   font-style: italic;
 }
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto/Roboto-Light.ttf') format('truetype');
   font-weight: 200;
 }
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
   font-weight: 400;
 }
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto/Roboto-Bold.ttf') format('truetype');
@@ -53,10 +56,18 @@ main {
   padding: 24px 33px 24px 32px;
   flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
   margin-top: auto;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 a {
@@ -69,16 +80,18 @@ input {
   padding: 10px 16px;
   border-radius: 8px;
   border: 1px solid #E1E3E6;
-  
+
   font-family: 'SF Pro Text';
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
 }
+
 input:focus-visible {
   outline: none;
   border: 1px solid #FF5500
 }
+
 input::placeholder {
   font-family: 'SF Pro Text';
   color: #999FA6;
@@ -92,4 +105,35 @@ label {
   line-height: 20px;
   margin-top: 16px;
   margin-bottom: 4px;
+}
+
+button.btn-primary {
+  padding: 8px 16px;
+
+  color: #fff;
+  background: #FF5500;
+  border-radius: 8px;
+
+  border: solid 1px #FF5500;
+  margin: 4px;
+  outline: 0;
+}
+
+button.btn-outline {
+  padding: 8px 16px;
+  
+  color: #FF5500;
+  background: #fff;
+  border-radius: 8px;
+  
+  border: solid 1px #FF5500;
+  margin: 4px;
+  outline: 0;
+}
+
+button.btn-icon {
+  background: none;
+  border: 0;
+  outline: 0;
+  line-height: 0;
 }

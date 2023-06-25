@@ -1,17 +1,26 @@
-.expander {
-  padding: 24px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-height: 80px;
-
-  background: #FFFFFF;
-  border-radius: 8px;
-}
-
-.expander h3 {
+h3.header {
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 32px;
+}
+
+p.collapsed {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+
+p.expanded {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+
+img.expanded {
+  transform: rotate(0deg);
+}
+
+img.collapsed {
+  transform: rotate(180deg);
 }

@@ -3,7 +3,7 @@ export type FilmGenre = "fantasy" | "horror" | "action" | "comedy";
 export const filmGenres: { [key in FilmGenre]: string } = {
   fantasy: "Фэнтези",
   horror: 'Ужасы',
-  action: 'Триллер',
+  action: 'Боевик',
   comedy: 'Комедия'
 };
 

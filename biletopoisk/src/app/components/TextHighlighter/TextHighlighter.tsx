@@ -1,3 +1,5 @@
+'use client'
+
 import { Fragment, FunctionComponent, createContext, useContext } from "react";
 import styles from "./TextHighlighter.module.css";
 
@@ -6,7 +8,7 @@ interface Props {
 }
 
 export const HighlighterContext = createContext('');
-
+// этот компонент я сделал, потомучто давно хотел сделать подсветку поисковой выдач на спанах
 export const TextHighlighter: FunctionComponent<Props> = ({ text }) => {
   const highlightPattern = useContext(HighlighterContext).toLowerCase();
   if (highlightPattern === '') {
@@ -25,15 +27,3 @@ export const TextHighlighter: FunctionComponent<Props> = ({ text }) => {
     }
   </>
 }
-
-// что происходит при use client ?
-
-// Как правильно связать состояние корзины и список фильмов?
-
-// Делать ли дроп дауны на порталах?
-
-// Когда в кинопоиске будет переключение профиля пользователя?
-
-// https://nextjs.org/docs/app/building-your-application/optimizing/images
-
-// дебонс на ввод
