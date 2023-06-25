@@ -15,7 +15,7 @@ jest.mock("../AppModal/AppModal", () => {
 describe('#FilmCounter', () => {
   const filmId = 'abcd';
   let container: RenderResultExtended;
-  const initialCounter = 1;
+  const initialCounter = 2;
 
   describe('without reset button', () => {
     beforeEach(() => {
@@ -43,13 +43,26 @@ describe('#FilmCounter', () => {
 
     it('should decrement on - click', () => {
       fireEvent.click(container.getByTitle('Убавить'));
-      expect(container.getByText(`${initialCounter - 1}`)).toBeInTheDocument();
-      expect(selectFilmAmount(container.store.getState(), filmId)).toBe(initialCounter - 1);
+      expect(container.getByText(`1`)).toBeInTheDocument();
+      expect(selectFilmAmount(container.store.getState(), filmId)).toBe(1);
     });
 
-    it('should disable - button on 0', () => {
+    it('should decrement show modal when count is 1 ', () => {
       fireEvent.click(container.getByText('-'));
-      expect(container.getByTitle('Убавить')).toBeDisabled();
+      fireEvent.click(container.getByText('-'));
+      expect(container.getByText('AppModal')).toBeInTheDocument();
+
+    });
+
+    it('should disable decrement when count is 0', () => {
+      container = renderWithProviders(<FilmCounter filmId={filmId} />, {
+        preloadedState: {
+          cart: {
+            [filmId]: 0,
+          }
+        }
+      });
+      expect(container.getAllByTitle('Убавить')[1]).toBeDisabled();
     });
   });
   describe('with reset button', () => {
@@ -71,7 +84,6 @@ describe('#FilmCounter', () => {
     });
     
     it('should reset on reset click', () => {
-      expect(container.getByText('1')).toBeInTheDocument();
       fireEvent.click(container.getByTitle('Удалить'));
       expect(container.getByText('AppModal')).toBeInTheDocument();
     });

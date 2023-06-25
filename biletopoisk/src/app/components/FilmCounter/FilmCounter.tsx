@@ -21,6 +21,14 @@ export const FilmCounter: FunctionComponent<Props> = ({ filmId, allowReset }) =>
   const total = useSelector((state: RootState) => selectCartTotal(state));
   const dispatch = useDispatch();
 
+  const handleDecrement = () => {
+    if (amount === 1) {
+      setIsModalVisible(true);
+    } else {
+      dispatch(cartActions.decrement(filmId))
+    }
+  }
+
   const handleClose = (status: 'ok' | 'cancel') => {
     setIsModalVisible(false);
     if (status === 'ok') {
@@ -29,15 +37,15 @@ export const FilmCounter: FunctionComponent<Props> = ({ filmId, allowReset }) =>
   };
 
   return <div className={styles.container}>
-    <button className={styles.buttons} onClick={() => dispatch(cartActions.decrement(filmId))} disabled={amount === 0} title="Убавить">-</button>
+    <button className={styles.buttons} onClick={handleDecrement} disabled={amount === 0} title="Убавить">-</button>
     <div className={styles.counter}>{amount}</div>
     <button className={styles.buttons} onClick={() => dispatch(cartActions.increment(filmId))} disabled={total >= 30} title="Добавить">+</button>
     {!!allowReset && <>
       <button className={classNames(['btn-icon', styles.removeBtn])} onClick={() => setIsModalVisible(true)} disabled={amount === 0} title="Удалить">
         <Image src="cross.svg" width={16} height={16} alt="Закрыть"></Image>
       </button>
-      {isModalVisible && <AppModal header="Удаление билета" text="Вы уверены, что хотите удалить билет?" onClose={handleClose} />}
     </>
     }
+    {isModalVisible && <AppModal header="Удаление билета" text="Вы уверены, что хотите удалить билет?" onClose={handleClose} />}
   </div>
 }
